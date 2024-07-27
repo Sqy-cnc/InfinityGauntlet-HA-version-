@@ -4,11 +4,11 @@ import sys
 import logging
 from record import Record
 from snap import is_Snap,Load
-import torchaudio
-from homeassistant_api import Client
-api_server = 'http://192.168.1.13:8123/api'
-access_token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI1ZTdmOTdhZTMzNTM0Nzg2YjIwNjIxMzY1MmIwY2U0ZiIsImlhdCI6MTcyMTY0ODA0MywiZXhwIjoyMDM3MDA4MDQzfQ.eErAsNXGgRbehrX_o4xMYMneiGBcrFibK-NRdeKWC8s'
-light_entity_id = 'light.yeelight_color4_0x179d8346'  # Replace with your light entity ID
+import torchaudio   
+from homeassistant_api import Client   
+api_server = 'localhost:8123/api' # Replace with your homeassistant_api url
+access_token = ''# Replace with your home assistant token
+light_entity_id = ''  # Replace with your light entity ID
 def toggle_light():
         with Client(api_server, access_token) as client:
             light = client.get_domain("light")
@@ -24,7 +24,7 @@ class Analyze:
     def connect_target_device(self):
             Record("tmp/tmp.wav",debug=False)
             val=is_Snap("tmp/tmp.wav")
-            if(val>0.8):
+            if(val>0.8): #Customize the sensitivity
                 print(val)
                 print("Snap detected!")
                 toggle_light()
